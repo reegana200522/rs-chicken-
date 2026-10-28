@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crispy Chicken &amp; Pakoda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Work+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #ffc928;
+    --yellow-soft: #ffdf95;
+    --dark: #1c1b1b;
+    --red: #a93700;
+    --gold: #765a00;
+    --olive: #4e4633;
+    --muted: #5f5e5e;
+    --bg: #fcf9f8;
+    --surface: #f6f3f2;
+    --line: #eae7e7;
+    --footer: #313030;
+    --pill: #ffdbcf;
+    --wa: #25d366;
+    --heading: 'Space Grotesk', system-ui, sans-serif;
+    --body: 'Work Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body { font-family: var(--body); background: var(--bg); color: var(--dark); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  .wrap { max-width: 1184px; margin: 0 auto; padding: 0 48px; }
+  h1, h2, h3, h4 { font-family: var(--heading); font-weight: 700; line-height: 1.1; }
+  .tag { display: inline-block; font-family: var(--heading); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; }
+  .tag-pill { background: var(--pill); color: var(--red); }
+  .tag-yellow { background: var(--yellow); color: #6f5500; }
+  .tag-dark { background: var(--footer); color: var(--yellow); }
+  .btn { display: inline-flex; align-items: center; gap: 12px; font-family: var(--heading); font-weight: 700; font-size: 15px; border: 0; cursor: pointer; border-radius: 999px; transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .btn-dark { background: #313030; color: #f3f0ef; padding: 17px 32px; box-shadow: 0 10px 24px rgba(28,27,27,.18); }
+  .btn-light { background: var(--line); color: var(--dark); padding: 17px 32px; }
+  .btn-yellow { background: var(--yellow); color: var(--dark); padding: 14px 28px; }
+  .section-head { text-align: center; max-width: 760px; margin: 0 auto 48px; }
+  .section-head p { margin-top: 14px; color: var(--muted); font-size: 15px; }
+  .section-head h2 { font-size: 40px; margin-top: 14px; }
+
+  /* ---------- Header ---------- */
+  header.site { position: sticky; top: 0; z-index: 50; background: rgba(252,249,248,.95); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,.04); }
+  header.site .bar { display: flex; align-items: center; justify-content: space-between; height: 80px; max-width: 1280px; margin: 0 auto; padding: 0 48px; gap: 24px; }
+  .logo { display: flex; align-items: center; gap: 12px; font-family: var(--heading); font-weight: 700; font-size: 17px; letter-spacing: .5px; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+  nav.main { display: flex; gap: 28px; }
+  nav.main a { font-family: var(--heading); font-weight: 700; font-size: 13px; color: var(--olive); }
+  nav.main a:first-child { color: #6f5500; background: var(--yellow); padding: 4px 16px; border-radius: 999px; }
+  nav.main a:hover { color: var(--red); }
+  .nav-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--dark); color: var(--bg); font-family: var(--heading); font-weight: 700; font-size: 13px; padding: 9px 18px; border-radius: 999px; }
+  .nav-cta .dot { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); display: grid; place-items: center; }
+  .nav-cta .dot svg { width: 14px; height: 14px; stroke: #fff; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 96px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .pill-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--yellow); color: var(--dark); font-family: var(--heading); font-weight: 700; font-size: 11px; letter-spacing: 1.2px; padding: 7px 16px; border-radius: 999px; }
+  .pill-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+  .hero h1 { font-size: 64px; margin-top: 26px; letter-spacing: -1.2px; }
+  .hero h1 span { color: var(--red); }
+  .hero .sub { font-family: var(--heading); font-weight: 500; color: var(--olive); font-size: 20px; margin-top: 18px; }
+  .hero .desc { color: var(--muted); font-size: 16px; margin-top: 22px; max-width: 540px; }
+  .hero .ctas { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+  .hero .ctas .btn-dark svg { stroke: var(--yellow); }
+  .trust { display: flex; gap: 28px; margin-top: 36px; flex-wrap: wrap; }
+  .trust div { display: flex; align-items: center; gap: 10px; font-family: var(--heading); font-weight: 700; font-size: 13px; color: var(--olive); }
+  .trust svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .hero-visual { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 24px; overflow: hidden; background: linear-gradient(135deg, #eae7e7 0%, #f6f3f2 50%, #ffdbcf 100%); box-shadow: 0 24px 48px rgba(28,27,27,.08); }
+  .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-visual .shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(28,27,27,.35)); }
+  .float-badge { position: absolute; left: 24px; right: 24px; bottom: 24px; background: rgba(252,249,248,.95); border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; gap: 16px; box-shadow: 0 12px 30px rgba(0,0,0,.12); }
+  .float-badge .ic { width: 48px; height: 48px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; flex-shrink: 0; }
+  .float-badge .ic svg { width: 20px; height: 20px; stroke: var(--dark); fill: none; stroke-width: 2; }
+  .float-badge small { display: block; font-family: var(--heading); font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 1px; }
+  .float-badge strong { font-family: var(--heading); font-size: 15px; }
+
+  /* ---------- Feature / Achievement ---------- */
+  .achieve { padding: 80px 0 96px; background: #fff; }
+  .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+  .feature { background: var(--surface); border-radius: 16px; padding: 24px; }
+  .feature .ic { width: 48px; height: 48px; border-radius: 12px; background: var(--yellow); display: grid; place-items: center; margin-bottom: 22px; }
+  .feature .ic svg { width: 22px; height: 22px; fill: none; stroke: var(--dark); stroke-width: 2; }
+  .feature h3 { font-size: 20px; margin-bottom: 8px; }
+  .feature p { color: var(--muted); font-size: 13px; }
+
+  /* ---------- Menu ---------- */
+  .menu-sec { padding: 96px 0 96px; }
+  .menu-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 56px; flex-wrap: wrap; }
+  .menu-head .left { max-width: 680px; }
+  .menu-head h2 { font-size: 40px; margin-top: 14px; }
+  .menu-head p { color: var(--muted); font-size: 15px; margin-top: 14px; }
+  .menu-head .note { font-family: var(--heading); font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 1px; }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .item { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(28,27,27,.05); display: flex; flex-direction: column; }
+  .item .photo { position: relative; height: 280px; background: var(--line); }
+  .item .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .item .badge { position: absolute; top: 12px; left: 12px; font-family: var(--heading); font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 5px 10px; border-radius: 999px; background: var(--footer); color: #f3f0ef; }
+  .item .badge.red { background: var(--red); color: #fff; }
+  .item .badge.gold { background: var(--gold); color: #fff; }
+  .item .weight { position: absolute; top: 12px; right: 12px; font-family: var(--heading); font-size: 13px; font-weight: 700; background: var(--yellow); padding: 6px 12px; border-radius: 999px; }
+  .item .body { padding: 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+  .item .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .item h3 { font-size: 20px; }
+  .item .price { font-family: var(--heading); font-size: 26px; font-weight: 700; color: var(--red); white-space: nowrap; }
+  .item p { color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .item .actions { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: auto; }
+  .stepper { display: inline-flex; align-items: center; background: var(--surface); border-radius: 999px; padding: 4px; }
+  .stepper button { width: 32px; height: 32px; border-radius: 50%; border: 0; background: #fff; cursor: pointer; display: grid; place-items: center; }
+  .stepper button svg { width: 12px; height: 12px; stroke: var(--dark); stroke-width: 2.2; }
+  .stepper span { min-width: 32px; text-align: center; font-family: var(--heading); font-weight: 700; font-size: 13px; }
+  .add-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #313030; color: #f3f0ef; font-family: var(--heading); font-weight: 700; font-size: 13px; border: 0; border-radius: 999px; padding: 10px 16px; cursor: pointer; }
+  .add-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .add-btn:hover { background: var(--red); }
+  .menu-foot { display: flex; justify-content: center; margin-top: 48px; }
+
+  /* ---------- Promo ---------- */
+  .promo { padding: 0 0 96px; }
+  .promo-card { background: var(--footer); color: #fff; border-radius: 32px; padding: 64px; display: grid; grid-template-columns: 1.3fr .9fr; gap: 48px; align-items: center; }
+  .promo h2 { font-size: 40px; margin-top: 22px; color: #fff; }
+  .promo p { color: #c8c6c5; font-size: 16px; margin-top: 20px; max-width: 620px; }
+  .promo .btn-yellow { margin-top: 36px; }
+  .promo .btn-yellow svg { stroke: #251a00; width: 14px; height: 14px; }
+  .highlight { background: rgba(255,255,255,.1); border-radius: 24px; padding: 32px; text-align: left; }
+  .highlight .ic { width: 64px; height: 64px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; margin-bottom: 24px; }
+  .highlight .ic svg { width: 26px; height: 26px; fill: none; stroke: var(--dark); stroke-width: 2; }
+  .highlight h4 { font-size: 20px; color: #fff; }
+  .highlight p { font-size: 13px; margin-top: 14px; color: #c8c6c5; }
+
+  /* ---------- Order form ---------- */
+  .order { padding: 96px 0; background: #fff; }
+  .order-box { max-width: 832px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 20px 50px rgba(28,27,27,.08); border: 1px solid var(--line); padding: 40px; }
+  .step-title { display: flex; align-items: center; gap: 12px; font-family: var(--heading); font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--yellow); display: grid; place-items: center; font-size: 13px; flex-shrink: 0; }
+  .step { margin-bottom: 32px; }
+  .step + .sep { height: 1px; background: var(--line); margin-bottom: 32px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  label.lbl { display: block; font-family: var(--heading); font-size: 13px; font-weight: 700; color: var(--olive); margin-bottom: 8px; }
+  .field input, .field select { width: 100%; height: 48px; background: var(--surface); border: 1px solid transparent; border-radius: 12px; padding: 0 16px; font-size: 15px; outline: none; }
+  .field input::placeholder { color: #9ca3af; }
+  .field input:focus, .field select:focus { border-color: var(--yellow); background: #fff; box-shadow: 0 0 0 3px rgba(255,201,40,.25); }
+  .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231c1b1b' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+  .menu-pick { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: end; }
+  .menu-pick .stepper { height: 48px; }
+  .btn-add-item { height: 48px; background: var(--yellow); border: 0; border-radius: 12px; padding: 0 22px; font-family: var(--heading); font-weight: 700; font-size: 13px; cursor: pointer; }
+  .summary { margin-top: 20px; background: var(--surface); border-radius: 16px; padding: 24px; }
+  .summary .top { display: flex; justify-content: space-between; align-items: center; }
+  .summary h4 { font-size: 15px; }
+  .pill-count { background: #e5e2e1; font-family: var(--heading); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+  .cart-list { list-style: none; margin-top: 14px; display: grid; gap: 8px; }
+  .cart-list li { display: flex; justify-content: space-between; align-items: center; background: #fff; border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+  .cart-list li button { background: none; border: 0; color: var(--red); font-family: var(--heading); font-weight: 700; font-size: 12px; cursor: pointer; }
+  .empty { font-style: italic; color: var(--muted); font-size: 13px; margin-top: 14px; }
+  .total { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px dashed #cfc9c7; }
+  .total strong { font-family: var(--heading); font-size: 15px; }
+  .total .amt { font-family: var(--heading); font-size: 26px; font-weight: 700; color: var(--red); }
+  .pay-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pay-opt { position: relative; display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: 12px; padding: 14px 16px; cursor: pointer; border: 1px solid transparent; font-family: var(--heading); font-weight: 700; font-size: 13px; }
+  .pay-opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .pay-opt .radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #9ca3af; background: #fff; flex-shrink: 0; position: relative; }
+  .pay-opt:has(input:checked) { background: rgba(255,201,40,.2); border-color: var(--yellow); }
+  .pay-opt:has(input:checked) .radio { border-color: var(--gold); }
+  .pay-opt:has(input:checked) .radio::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--gold); }
+  .pay-link { display: inline-block; margin-top: 12px; font-family: var(--heading); font-size: 13px; font-weight: 700; color: var(--red); text-decoration: underline; }
+  .pay-link[hidden] { display: none; }
+  .submit-wrap { text-align: center; margin-top: 8px; }
+  .submit-btn { width: 100%; height: 58px; background: var(--wa); color: #fff; border: 0; border-radius: 999px; font-family: var(--heading); font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; cursor: pointer; box-shadow: 0 12px 28px rgba(37,211,102,.3); transition: transform .15s; }
+  .submit-btn:hover { transform: translateY(-2px); }
+  .submit-btn:disabled { opacity: .6; cursor: wait; transform: none; }
+  .submit-btn svg { width: 24px; height: 24px; fill: #fff; }
+  .submit-note { font-size: 13px; color: var(--muted); margin-top: 18px; }
+  .status { margin-top: 14px; font-size: 14px; font-family: var(--heading); font-weight: 700; min-height: 20px; text-align: center; }
+  .status.ok { color: #1b7a3d; }
+  .status.err { color: var(--red); }
+
+  /* ---------- Reviews ---------- */
+  .reviews { padding: 96px 0; }
+  .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .review { background: var(--surface); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+  .stars { display: flex; gap: 4px; }
+  .stars svg { width: 17px; height: 16px; fill: var(--gold); }
+  .review blockquote { font-style: italic; font-size: 15px; line-height: 1.6; flex: 1; }
+  .author { display: flex; align-items: center; gap: 14px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-family: var(--heading); font-weight: 700; font-size: 13px; color: var(--dark); background: var(--yellow); flex-shrink: 0; }
+  .author strong { display: block; font-family: var(--heading); font-size: 13px; }
+  .author span { font-size: 13px; color: var(--muted); }
+  .sample { font-family: var(--heading); font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 1px; margin-left: auto; align-self: flex-start; }
+  .review-cta { display: flex; justify-content: center; margin-top: 40px; }
+  .review-cta .btn-light svg { stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* ---------- FAQ ---------- */
+  .faq { padding: 96px 0; background: var(--bg); }
+  .faq-box { max-width: 768px; margin: 0 auto; }
+  .faq-box .section-head { margin-bottom: 40px; }
+  .faq-box .section-head h2 { font-size: 40px; }
+  details.qa { background: #fff; border-radius: 16px; box-shadow: 0 4px 14px rgba(28,27,27,.05); margin-bottom: 14px; overflow: hidden; }
+  details.qa summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 24px; font-family: var(--heading); font-weight: 700; font-size: 16px; }
+  details.qa summary::-webkit-details-marker { display: none; }
+  details.qa summary svg { width: 14px; height: 14px; stroke: var(--red); fill: none; stroke-width: 2.4; transition: transform .2s; flex-shrink: 0; }
+  details.qa[open] summary svg { transform: rotate(180deg); }
+  details.qa p { padding: 0 24px 22px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+  /* ---------- Footer ---------- */
+  footer.site-footer { background: var(--footer); color: #c8c6c5; padding: 0 0 40px; }
+  .cta-band { max-width: 1184px; margin: 0 auto; padding: 48px; transform: translateY(-50%); background: rgba(255,255,255,.05); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: -40px; }
+  .cta-band small { font-family: var(--heading); font-size: 11px; font-weight: 700; letter-spacing: 1.4px; color: var(--yellow-soft); }
+  .cta-band h3 { font-size: 26px; color: #fff; margin-top: 8px; }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 40px; padding-top: 96px; max-width: 1184px; margin: 0 auto; padding-left: 48px; padding-right: 48px; }
+  footer h4 { font-family: var(--heading); font-size: 15px; color: #fff; letter-spacing: .6px; margin-bottom: 18px; }
+  footer .brand { font-family: var(--heading); font-size: 15px; font-weight: 700; color: var(--yellow); letter-spacing: .5px; }
+  footer .about { font-size: 13px; line-height: 1.7; margin-top: 16px; max-width: 300px; }
+  .socials { display: flex; gap: 8px; margin-top: 24px; }
+  .socials a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; }
+  .socials a:hover { background: var(--yellow); }
+  .socials a svg { width: 17px; height: 17px; fill: var(--yellow); }
+  .socials a:hover svg { fill: var(--dark); }
+  footer ul { list-style: none; display: grid; gap: 10px; font-size: 13px; }
+  footer ul a:hover { color: var(--yellow); }
+  .contact-row { display: flex; gap: 12px; font-size: 13px; margin-bottom: 14px; align-items: flex-start; }
+  .contact-row svg { width: 16px; height: 16px; fill: var(--yellow); flex-shrink: 0; margin-top: 2px; }
+  .hours div { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; margin-bottom: 10px; }
+  .hours div b { color: #fff; font-weight: 500; }
+  .hours .live { margin-top: 12px; background: rgba(255,255,255,.1); border-radius: 4px; padding: 6px 12px; font-family: var(--heading); font-size: 11px; font-weight: 700; color: var(--yellow); letter-spacing: .6px; display: inline-block; }
+  .copy { max-width: 1184px; margin: 48px auto 0; padding: 24px 48px 0; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; gap: 16px; font-size: 13px; flex-wrap: wrap; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .wrap, header.site .bar, .footer-grid, .copy { padding-left: 24px; padding-right: 24px; }
+    nav.main { display: none; }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 48px; }
+    .features { grid-template-columns: repeat(2, 1fr); }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .promo-card { grid-template-columns: 1fr; padding: 40px; }
+    .review-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .cta-band { flex-direction: column; align-items: flex-start; padding: 32px; }
+  }
+  @media (max-width: 640px) {
+    .wrap, header.site .bar { padding-left: 18px; padding-right: 18px; }
+    .hero { padding: 56px 0 48px; }
+    .hero h1 { font-size: 38px; }
+    .section-head h2, .menu-head h2, .promo h2, .faq-box .section-head h2 { font-size: 30px; }
+    .features, .menu-grid { grid-template-columns: 1fr; }
+    .order-box { padding: 24px; }
+    .grid-2, .menu-pick, .pay-options { grid-template-columns: 1fr; }
+    .promo-card { padding: 28px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .nav-cta { padding: 8px 12px; font-size: 12px; }
+    .logo span.name { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="bar">
+    <a href="#top" class="logo">
+      <span class="logo-mark">RS</span>
+      <span class="name">CRISPY CHICKEN &amp; PAKODA</span>
+    </a>
+    <nav class="main">
+      <a href="#top">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">About Us</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#order" class="nav-cta">Order Now
+      <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="pill-badge"><span class="dot"></span>FRESHLY PREPARED • CRISPY • DELICIOUS</span>
+      <h1>RS Chicken pokoda.<br><span>Bold Taste.</span><br>Happy Moments.</h1>
+      <p class="sub">Your Favourite Chicken &amp; Pakoda, Freshly Fried.</p>
+      <p class="desc">Enjoy crispy chicken lollipops, golden chicken pakoda, juicy chicken leg pieces, flavourful wings, and more — freshly prepared and full of flavour.</p>
+      <div class="ctas">
+        <a href="#order" class="btn btn-dark">Order Now
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#menu" class="btn btn-light">Explore Our Menu</a>
+      </div>
+      <div class="trust">
+        <div><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>Freshly prepared</div>
+        <div><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.2"/></svg>Affordable prices</div>
+        <div><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg>Easy ordering</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="https://www.figma.com/api/mcp/asset/670d82e9-f939-4713-ac3b-78bb8c265c2d" alt="Crispy chicken and pakoda" onerror="this.remove()">
+      <div class="shade"></div>
+      <div class="float-badge">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+        <div>
+          <small>HOT &amp; FRESH FROM THE FRYER</small>
+          <strong>Fresh to process</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. ACHIEVEMENT & TRUST ============ -->
+<section class="achieve" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag tag-pill">QUALITY ASSURED</span>
+      <h2>Good Food. Great Crunch. Every Time.</h2>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+        <h3>Freshly Prepared</h3>
+        <p>Made fresh for a satisfying, crispy bite in every single order.</p>
+      </div>
+      <div class="feature">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.2"/></svg></div>
+        <h3>Budget-Friendly</h3>
+        <p>Enjoy tasty street favourites and gourmet snacks at pocket-friendly prices.</p>
+      </div>
+      <div class="feature">
+        <div class="ic"><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg></div>
+        <h3>Customer Favourites</h3>
+        <p>Discover our widely celebrated local spiced chicken and pakoda snacks.</p>
+      </div>
+      <div class="feature">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></svg></div>
+        <h3>Easy Ordering</h3>
+        <p>Choose your favourites and send your customized order instantly through WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. MENU ============ -->
+<section class="menu-sec" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <div class="left">
+        <span class="tag tag-yellow">OUR MENU</span>
+        <h2>RS Crispy Favourites, Made for You.</h2>
+        <p>Explore our tasty selection and choose your favourites to build your meal.</p>
+      </div>
+      <span class="note">PRICES INCLUSIVE OF TAXES</span>
+    </div>
+
+    <div class="menu-grid">
+      <!-- Item 1 -->
+      <article class="item">
+        <div class="photo">
+          <img src="https://www.figma.com/api/mcp/asset/c54b1be9-7afd-4f95-ad9c-b91e795ef35a" alt="Chicken Lollipop" onerror="this.remove()">
+          <span class="badge">CHEF SPECIAL</span>
+          <span class="weight">5 pieces</span>
+        </div>
+        <div class="body">
+          <div class="head"><h3>Chicken Lollipop</h3><span class="price">₹100</span></div>
+          <p>Crispy on the outside, juicy on the inside, and full of flavour.</p>
+          <div class="actions">
+            <div class="stepper" data-stepper>
+              <button type="button" data-dec aria-label="Decrease"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/></svg></button>
+              <span data-qty>1</span>
+              <button type="button" data-inc aria-label="Increase"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/><line x1="6" y1="1" x2="6" y2="11"/></svg></button>
+            </div>
+            <button type="button" class="add-btn" data-add data-id="lollipop" data-name="Chicken Lollipop" data-label="5 pieces" data-price="100">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Add to Order
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 2 -->
+      <article class="item">
+        <div class="photo">
+          <img src="https://www.figma.com/api/mcp/asset/e1b8e79d-0da7-4265-b3ae-5543a45c7cf9" alt="Chicken Pakoda" onerror="this.remove()">
+          <span class="badge red">BESTSELLER</span>
+          <span class="weight">100 g</span>
+        </div>
+        <div class="body">
+          <div class="head"><h3>Chicken Pakoda</h3><span class="price" style="color:var(--red)">₹50</span></div>
+          <p>Golden, crunchy chicken bites perfect for snack time.</p>
+          <div class="actions">
+            <div class="stepper" data-stepper>
+              <button type="button" data-dec aria-label="Decrease"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/></svg></button>
+              <span data-qty>1</span>
+              <button type="button" data-inc aria-label="Increase"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/><line x1="6" y1="1" x2="6" y2="11"/></svg></button>
+            </div>
+            <button type="button" class="add-btn" data-add data-id="pakoda" data-name="Chicken Pakoda" data-label="100 g" data-price="50">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Add to Order
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 3 -->
+      <article class="item">
+        <div class="photo">
+          <img src="https://www.figma.com/api/mcp/asset/2503e25a-0a19-4156-9710-0de2ce3cf699" alt="Chicken Leg Piece" onerror="this.remove()">
+          <span class="badge">JUICY CRUNCH</span>
+          <span class="weight">1 piece</span>
+        </div>
+        <div class="body">
+          <div class="head"><h3>Chicken Leg Piece</h3><span class="price" style="color:var(--red)">₹50</span></div>
+          <p>A deliciously seasoned leg piece with a crispy coating.</p>
+          <div class="actions">
+            <div class="stepper" data-stepper>
+              <button type="button" data-dec aria-label="Decrease"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/></svg></button>
+              <span data-qty>1</span>
+              <button type="button" data-inc aria-label="Increase"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/><line x1="6" y1="1" x2="6" y2="11"/></svg></button>
+            </div>
+            <button type="button" class="add-btn" data-add data-id="legpiece" data-name="Chicken Leg Piece" data-label="1 piece" data-price="50">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Add to Order
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 4 -->
+      <article class="item">
+        <div class="photo">
+          <img src="https://www.figma.com/api/mcp/asset/643b9e2d-faea-4455-b148-ddcb815129ba" alt="Chicken Eral" onerror="this.remove()">
+          <span class="badge gold">POPULAR BITE</span>
+          <span class="weight">100 g</span>
+        </div>
+        <div class="body">
+          <div class="head"><h3>Chicken Eral</h3><span class="price" style="color:var(--red)">₹30</span></div>
+          <p>A flavourful snack prepared fresh for you with aromatic spices.</p>
+          <div class="actions">
+            <div class="stepper" data-stepper>
+              <button type="button" data-dec aria-label="Decrease"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/></svg></button>
+              <span data-qty>1</span>
+              <button type="button" data-inc aria-label="Increase"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/><line x1="6" y1="1" x2="6" y2="11"/></svg></button>
+            </div>
+            <button type="button" class="add-btn" data-add data-id="eral" data-name="Chicken Eral" data-label="100 g" data-price="30">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Add to Order
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 5 -->
+      <article class="item">
+        <div class="photo">
+          <img src="https://www.figma.com/api/mcp/asset/8a89049f-ffe7-4f15-9f53-cff7510def43" alt="Beef Pakoda" onerror="this.remove()">
+          <span class="badge">CRISPY SAVOURY</span>
+          <span class="weight">100 g</span>
+        </div>
+        <div class="body">
+          <div class="head"><h3>Beef Pakoda</h3><span class="price" style="color:var(--red)">₹60</span></div>
+          <p>A crispy, savoury pakoda with a bold, deeply satisfying taste.</p>
+          <div class="actions">
+            <div class="stepper" data-stepper>
+              <button type="button" data-dec aria-label="Decrease"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/></svg></button>
+              <span data-qty>1</span>
+              <button type="button" data-inc aria-label="Increase"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/><line x1="6" y1="1" x2="6" y2="11"/></svg></button>
+            </div>
+            <button type="button" class="add-btn" data-add data-id="beef" data-name="Beef Pakoda" data-label="100 g" data-price="60">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Add to Order
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 6 -->
+      <article class="item">
+        <div class="photo">
+          <img src="https://www.figma.com/api/mcp/asset/0a09c405-0516-421b-a4f3-7598c73a82c1" alt="Chicken Wings" onerror="this.remove()">
+          <span class="badge red">HOT WINGS</span>
+          <span class="weight">5 pieces</span>
+        </div>
+        <div class="body">
+          <div class="head"><h3>Chicken Wings</h3><span class="price" style="color:var(--red)">₹100</span></div>
+          <p>Crispy wings packed with deep spice and crunch in every bite.</p>
+          <div class="actions">
+            <div class="stepper" data-stepper>
+              <button type="button" data-dec aria-label="Decrease"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/></svg></button>
+              <span data-qty>1</span>
+              <button type="button" data-inc aria-label="Increase"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/><line x1="6" y1="1" x2="6" y2="11"/></svg></button>
+            </div>
+            <button type="button" class="add-btn" data-add data-id="wings" data-name="Chicken Wings" data-label="5 pieces" data-price="100">
+              <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Add to Order
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="menu-foot">
+      <a href="#order" class="btn btn-light">Go to Order Form</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. FEATURED OFFER / PROMO ============ -->
+<section class="promo">
+  <div class="wrap">
+    <div class="promo-card">
+      <div>
+        <span class="tag tag-dark">🔥</span>
+        <h2>Your Favourite Crunch Is Just a Few Clicks Away!</h2>
+        <p>Pick your favourites, choose your quantity, and send your order in minutes directly through WhatsApp for prompt frying.</p>
+        <a href="#order" class="btn btn-yellow">Build Your Order
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="highlight">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+        <h4>Direct Fryer to Box</h4>
+        <p>No reheating. Every order is dropped into sizzling, clean oil only when your WhatsApp ping arrives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ORDER FORM ============ -->
+<section class="order" id="order">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag tag-yellow">ORDER BUILDER</span>
+      <h2>Ready to Order Something Crispy?</h2>
+      <p>Choose your food, select your quantity, and share your details to send your order.</p>
+    </div>
+
+    <form class="order-box" id="orderForm" novalidate>
+      <!-- Step 1: Customer info -->
+      <div class="step">
+        <div class="step-title"><span class="step-num">1</span>Your Contact Details</div>
+        <div class="grid-2">
+          <div class="field">
+            <label class="lbl" for="name">Customer Name *</label>
+            <input id="name" name="name" type="text" placeholder="Enter your full name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label class="lbl" for="contact">Phone Number (10 Digits) *</label>
+            <input id="contact" name="contact" type="tel" inputmode="numeric" placeholder="Enter your mobile number" maxlength="10" required>
+          </div>
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <!-- Step 2: Menu selection -->
+      <div class="step">
+        <div class="step-title"><span class="step-num">2</span>Add Menu Items</div>
+        <div class="menu-pick">
+          <div class="field">
+            <label class="lbl" for="pickItem">Select item</label>
+            <select id="pickItem">
+              <option value="lollipop" data-name="Chicken Lollipop" data-label="5 pieces" data-price="100">Chicken Lollipop (5 pieces) - ₹100</option>
+              <option value="pakoda" data-name="Chicken Pakoda" data-label="100 g" data-price="50">Chicken Pakoda (100 g) - ₹50</option>
+              <option value="legpiece" data-name="Chicken Leg Piece" data-label="1 piece" data-price="50">Chicken Leg Piece (1 piece) - ₹50</option>
+              <option value="eral" data-name="Chicken Eral" data-label="100 g" data-price="30">Chicken Eral (100 g) - ₹30</option>
+              <option value="beef" data-name="Beef Pakoda" data-label="100 g" data-price="60">Beef Pakoda (100 g) - ₹60</option>
+              <option value="wings" data-name="Chicken Wings" data-label="5 pieces" data-price="100">Chicken Wings (5 pieces) - ₹100</option>
+            </select>
+          </div>
+          <div class="stepper" style="height:48px">
+            <button type="button" id="pickDec" aria-label="Decrease quantity"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/></svg></button>
+            <span id="pickQty">1</span>
+            <button type="button" id="pickInc" aria-label="Increase quantity"><svg viewBox="0 0 12 12"><line x1="1" y1="6" x2="11" y2="6"/><line x1="6" y1="1" x2="6" y2="11"/></svg></button>
+          </div>
+          <button type="button" class="btn-add-item" id="pickAdd">Add Item</button>
+        </div>
+
+        <div class="summary" id="summary">
+          <div class="top">
+            <h4>Order Summary</h4>
+            <span class="pill-count" id="itemCount">0 items</span>
+          </div>
+          <ul class="cart-list" id="cartList"></ul>
+          <p class="empty" id="emptyState">No items added yet. Click ‘Add to Order’ on any item above or from the menu.</p>
+          <div class="total">
+            <strong>GRAND TOTAL:</strong>
+            <span class="amt" id="grandTotal">₹0</span>
+          </div>
+        </div>
+      </div>
+      <div class="sep"></div>
+
+      <!-- Step 3: Payment -->
+      <div class="step">
+        <div class="step-title"><span class="step-num">3</span>Select Payment Method</div>
+        <div class="pay-options">
+          <label class="pay-opt">
+            <input type="radio" name="payment" value="UPI / QR Payment" checked>
+            <span class="radio"></span>UPI / QR Payment
+          </label>
+          <label class="pay-opt">
+            <input type="radio" name="payment" value="Cash">
+            <span class="radio"></span>Cash
+          </label>
+          <label class="pay-opt">
+            <input type="radio" name="payment" value="Pay at Shop">
+            <span class="radio"></span>Pay at Shop
+          </label>
+        </div>
+        <!-- Paste your payment URL into PAYMENT_URL in the script at the bottom of this file -->
+        <a id="payLink" class="pay-link" href="#" target="_blank" rel="noopener" hidden>Pay now via payment link →</a>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-wrap">
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4.2-.4c.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.5 2.3.9 2.3.6 2.7.6.4 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+          Send Order on WhatsApp
+        </button>
+        <p class="submit-note">Your order will be confirmed by the shop through WhatsApp.</p>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ 6. REVIEWS ============ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag tag-dark">TESTIMONIALS</span>
+      <h2>Made with Love. Loved for the Crunch.</h2>
+      <p>We’d love to hear what you think about our food and service.</p>
+    </div>
+    <div class="review-grid">
+      <div class="review">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg>
+        </div>
+        <blockquote>“Loved the crispy coating and the flavour. A great snack!”</blockquote>
+        <div class="author">
+          <span class="avatar">RS</span>
+          <div><strong>Rahul S.</strong><span>Verified Local Foodie</span></div>
+          <span class="sample">SAMPLE REVIEW</span>
+        </div>
+      </div>
+      <div class="review">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg>
+        </div>
+        <blockquote>“Tasty food at a reasonable price.”</blockquote>
+        <div class="author">
+          <span class="avatar" style="background:var(--gold);color:#fff">PM</span>
+          <div><strong>Priya M.</strong><span>Regular Evening Patron</span></div>
+          <span class="sample">SAMPLE REVIEW</span>
+        </div>
+      </div>
+      <div class="review">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg>
+        </div>
+        <blockquote>“Easy ordering and delicious chicken snacks.”</blockquote>
+        <div class="author">
+          <span class="avatar" style="background:var(--red);color:#fff">KV</span>
+          <div><strong>Karthik V.</strong><span>WhatsApp Ordering Fan</span></div>
+          <span class="sample">SAMPLE REVIEW</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-cta">
+      <a href="https://wa.me/918015890288?text=Hi%2C%20I%27d%20like%20to%20share%20feedback" target="_blank" rel="noopener" class="btn btn-light">
+        <svg viewBox="0 0 24 24" width="15" height="15"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Share Your Feedback
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="faq-box">
+    <div class="section-head">
+      <span class="tag tag-pill">HELP CENTER</span>
+      <h2>Got Questions? We’ve Got Answers.</h2>
+    </div>
+    <details class="qa">
+      <summary>How can I place an order?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <p>Pick your items above, set the quantity, fill in your name and phone number, then press “Send Order on WhatsApp”.</p>
+    </details>
+    <details class="qa">
+      <summary>How are the prices calculated?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <p>Each item has a fixed price shown on the menu. The Order Summary adds up your items and updates the grand total as you go.</p>
+    </details>
+    <details class="qa">
+      <summary>Which payment methods are available?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <p>You can choose UPI / QR payment, cash, or pay at the shop.</p>
+    </details>
+    <details class="qa">
+      <summary>Can I order multiple food items together?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <p>Yes. Add as many items and quantities as you like before sending your order.</p>
+    </details>
+    <details class="qa">
+      <summary>Is my order confirmed immediately?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <p>Your order is sent to the shop on WhatsApp. The shop confirms it there.</p>
+    </details>
+    <details class="qa">
+      <summary>Where is the shop located?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <p>Shop #12, Ground Floor, Food Street Boulevard, Main Junction.</p>
+    </details>
+    <details class="qa">
+      <summary>Can I request special instructions?<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></summary>
+      <p>Yes. Mention them (e.g. extra spicy, less oil, pack separately) in your WhatsApp chat after sending the order.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="cta-band">
+    <div>
+      <small>FRESH • SIZZLING • CRUNCHY</small>
+      <h3>Hungry? Let's Get Crispy!</h3>
+    </div>
+    <a href="#order" class="btn btn-yellow">Order Now</a>
+  </div>
+
+  <div class="footer-grid">
+    <div>
+      <h4 class="brand" style="color:var(--yellow);font-size:15px">CRISPY CHICKEN &amp; PAKODA</h4>
+      <p class="about">Artisanal spiced pakodas and signature golden fried chicken crusted with street-style secret batter. High heat, deep comfort.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.6L18 8h-4V6.3c0-.9.4-1.3 1.3-1.3H18V0h-3.4C10.9 0 9 1.9 9 4.9V8z"/></svg></a>
+        <a href="https://wa.me/918015890288" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#menu">Menu &amp; Combos</a></li>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#reviews">Customer Reviews</a></li>
+        <li><a href="#faq">Frequently Asked Questions</a></li>
+        <li><a href="#contact">Reach Out</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>STORE LOCATION</h4>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+        <span>Shop #12, Ground Floor, Food Street<br>Boulevard, Main Junction</span>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>
+        <a href="tel:+918015890288">+91 80158 90288</a>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2zm2 2v.5l8 5 8-5V6z"/></svg>
+        <a href="mailto:order@crispychickenpakoda.com">order@crispychickenpakoda.com</a>
+      </div>
+    </div>
+
+    <div>
+      <h4>OPENING HOURS</h4>
+      <div class="hours">
+        <div><b>Mon – Fri</b><span>11:30 AM – 11:00 PM</span></div>
+        <div><b>Saturday</b><span>11:30 AM – 12:00 AM</span></div>
+        <div><b>Sunday</b><span>12:00 PM – 11:30 PM</span></div>
+      </div>
+      <span class="live">LATE NIGHT DELIVERY ACTIVE</span>
+    </div>
+  </div>
+
+  <div class="copy">
+    <span>© 2025 Crispy Chicken &amp; Pakoda. All rights reserved.</span>
+    <span>Freshly Fried Daily • Street Soul, Gourmet Crunch</span>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================
+   CONFIGURATION
+   ========================================================== */
+// Google Apps Script Web App URL (deployed Code.gs)
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbypm90OJ8O8RT3kASkedS80DPOeJUtPYbINhNjshyIKMd7opBAZfqLVN0ukfuu5Txh9/exec";
+
+// WhatsApp number in international format, no "+" (country code 91)
+const WHATSAPP_NUMBER = "918015890288";
+
+// Payment URL (paste your link here; leave "" to hide the payment link)
+const PAYMENT_URL = "";
+
+/* ==========================================================
+   CART / MENU STATE
+   ========================================================== */
+const cart = {};            // id -> { name, label, price, qty }
+const $ = (sel, root = document) => root.querySelector(sel);
+
+function formatINR(n) { return "₹" + n.toLocaleString("en-IN"); }
+
+function addToCart(id, name, label, price, qty) {
+  if (!cart[id]) cart[id] = { name, label, price, qty: 0 };
+  cart[id].qty += qty;
+  renderCart();
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  renderCart();
+}
+
+function cartTotal() {
+  return Object.values(cart).reduce((sum, it) => sum + it.price * it.qty, 0);
+}
+
+function renderCart() {
+  const list = $("#cartList");
+  const ids = Object.keys(cart);
+  list.innerHTML = "";
+  let count = 0;
+
+  ids.forEach(id => {
+    const it = cart[id];
+    count += it.qty;
+    const li = document.createElement("li");
+    const left = document.createElement("span");
+    left.textContent = `${it.name} (${it.label}) × ${it.qty}`;
+    const right = document.createElement("span");
+    right.style.display = "flex";
+    right.style.gap = "12px";
+    right.style.alignItems = "center";
+    const amt = document.createElement("strong");
+    amt.textContent = formatINR(it.price * it.qty);
+    amt.style.fontFamily = "var(--heading)";
+    const rm = document.createElement("button");
+    rm.type = "button";
+    rm.textContent = "Remove";
+    rm.dataset.remove = id;
+    right.append(amt, rm);
+    li.append(left, right);
+    list.appendChild(li);
+  });
+
+  $("#emptyState").style.display = ids.length ? "none" : "block";
+  $("#itemCount").textContent = count + (count === 1 ? " item" : " items");
+  $("#grandTotal").textContent = formatINR(cartTotal());
+}
+
+/* Card steppers + Add to Order buttons (event delegation) */
+document.querySelectorAll("[data-stepper]").forEach(stepper => {
+  const qtyEl = stepper.querySelector("[data-qty]");
+  stepper.querySelector("[data-inc]").addEventListener("click", () => {
+    qtyEl.textContent = +qtyEl.textContent + 1;
+  });
+  stepper.querySelector("[data-dec]").addEventListener("click", () => {
+    qtyEl.textContent = Math.max(1, +qtyEl.textContent - 1);
+  });
+});
+
+document.querySelectorAll("[data-add]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const qty = +btn.closest(".item").querySelector("[data-qty]").textContent;
+    addToCart(btn.dataset.id, btn.dataset.name, btn.dataset.label, +btn.dataset.price, qty);
+  });
+});
+
+/* Order-form menu picker */
+let pickQty = 1;
+$("#pickInc").addEventListener("click", () => { pickQty++; $("#pickQty").textContent = pickQty; });
+$("#pickDec").addEventListener("click", () => { pickQty = Math.max(1, pickQty - 1); $("#pickQty").textContent = pickQty; });
+$("#pickAdd").addEventListener("click", () => {
+  const opt = $("#pickItem").selectedOptions[0];
+  addToCart(opt.value, opt.dataset.name, opt.dataset.label, +opt.dataset.price, pickQty);
+});
+
+$("#cartList").addEventListener("click", e => {
+  if (e.target.dataset.remove) removeFromCart(e.target.dataset.remove);
+});
+
+/* Payment link (shown only when PAYMENT_URL is set) */
+if (PAYMENT_URL) {
+  const pl = $("#payLink");
+  pl.href = PAYMENT_URL;
+  pl.hidden = false;
+}
+
+renderCart();
+
+/* ==========================================================
+   FORM SUBMIT
+   ========================================================== */
+function showSuccess() {
+  const s = $("#status");
+  s.className = "status ok";
+  s.textContent = "Order sent! Please check WhatsApp to confirm your order.";
+  $("#submitBtn").disabled = false;
+}
+
+function showError() {
+  const s = $("#status");
+  s.className = "status err";
+  s.textContent = "Could not save your order. Your WhatsApp message is ready to send.";
+  $("#submitBtn").disabled = false;
+}
+
+$("#orderForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const status = $("#status");
+  status.textContent = "";
+
+  // Read the four form fields
+  const name = $("#name").value.trim();
+  const contact = $("#contact").value.trim();
+  const payment = document.querySelector('input[name="payment"]:checked')?.value || "";
+
+  // Validation
+  if (!name) { status.className = "status err"; status.textContent = "Please enter your name."; $("#name").focus(); return; }
+  if (!/^\d{10}$/.test(contact)) { status.className = "status err"; status.textContent = "Please enter a valid 10-digit phone number."; $("#contact").focus(); return; }
+  if (!Object.keys(cart).length) { status.className = "status err"; status.textContent = "Please add at least one item to your order."; return; }
+
+  // Build the menu string and total
+  const menu = Object.values(cart)
+    .map(it => `${it.name} (${it.label}) x${it.qty} = ${formatINR(it.price * it.qty)}`)
+    .join("; ") + ` | Total: ${formatINR(cartTotal())}`;
+
+  // 1) Open WhatsApp first (must happen inside the click/submit gesture to avoid popup blocking)
+  const waText = `New Order\nName: ${name}\nPhone: ${contact}\nItems: ${menu}\nPayment: ${payment}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`, "_blank", "noopener");
+
+  // 2) Save to Google Sheets (GET, no-cors, opaque response; per required rules)
+  const url = SCRIPT_URL + "?" + new URLSearchParams({ name, contact, menu, payment });
+  $("#submitBtn").disabled = true;
+  fetch(url, { method: "GET", mode: "no-cors" })
+    .then(() => showSuccess())
+    .catch(() => showError());
+});
+
+// Digits only in phone field
+$("#contact").addEventListener("input", e => {
+  e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
+});
+</script>
+</body>
+</html>
